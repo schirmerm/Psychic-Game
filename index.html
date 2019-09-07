@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <h1>The Psychic Game</h1>  
+    <form>
+        <p >Guess what letter I'm thinking of</p>
+        <p id = "wins"></p>
+        <p id = "losses"></p>
+        <p id = "guesses"></p>
+        <p id = "chosen"></p>
+    </form>
+
+
+    <script>
+        let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+        let wins = 0;
+        let losses= 0;
+        let guesses= 9;
+        let message = ''
+
+        
+       
+        const getGuess = function() {
+            return alphabet[Math.floor(Math.random() * alphabet.length)] 
+        }
+       //Getting Guess from keyboard 
+      
+         //get Random Guess from Computer    
+        //Wins will happen when Computer guess matches userGuess
+        //Losses happen when I use up all my guesses
+        
+        const runGame = function() {
+            compGuess = getGuess()
+            console.log(compGuess)
+            
+            document.onkeyup = function(event) {
+            let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                if (event.keyCode >= 65 && event.keyCode <= 90){
+                        
+                        guesses = guesses - 1
+                        console.log(userGuess)
+                            if(userGuess === compGuess){
+                                wins = wins + 1
+                                console.log('You Win')
+                                runGame()
+                            }else if(guesses === 0){ 
+                                losses = losses + 1
+                                runGame()
+                        }else{}
+               
+               
+                
+            }
+                else{}
+            
+            
+            
+            
+            }
+            document.getElementById('wins').innerHTML = "Wins: " + wins;
+            document.getElementById('losses').innerHTML = "losses: " + losses;
+            document.getElementById('guesses').innerHTML = `Guesses left: ${guesses}` ;
+            document.getElementById('chosen').innerHTML = "Your guesses so far: " + message;  
+
+        }
+         
+
+        runGame()
+        
+    
+    
+    
+    </script>
+</body>
+</html>
