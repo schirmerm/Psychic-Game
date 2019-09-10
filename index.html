@@ -20,32 +20,27 @@
     <script>
         let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-        let wins = 0;
-        let losses= 0;
-        let guesses= 9;
-        let message = ''
-
-        
-       
         const getGuess = function() {
             return alphabet[Math.floor(Math.random() * alphabet.length)] 
         }
-       //Getting Guess from keyboard 
-      
-         //get Random Guess from Computer    
-        //Wins will happen when Computer guess matches userGuess
-        //Losses happen when I use up all my guesses
-        
-        const runGame = function() {
+
+        let wins = 0;
+        let losses= 0;
+        let guesses= 9;
+        let guessSoFar = []
+
+            const runGame = function() {
+            
             compGuess = getGuess()
             console.log(compGuess)
-            
+           
+
             document.onkeyup = function(event) {
             let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                if (event.keyCode >= 65 && event.keyCode <= 90){
-                        
-                        guesses = guesses - 1
+                if (event.keyCode >= 65 && event.keyCode <= 90){ 
                         console.log(userGuess)
+                        guessSoFar.push(event.key) 
+                        
                             if(userGuess === compGuess){
                                 wins = wins + 1
                                 console.log('You Win')
@@ -53,8 +48,11 @@
                             }else if(guesses === 0){ 
                                 losses = losses + 1
                                 runGame()
-                        }else{}
-               
+                             }
+                             else{
+                                 guesses = guesses - 1
+                              }
+                           
                
                 
             }
@@ -64,11 +62,11 @@
             
             
             }
-            document.getElementById('wins').innerHTML = "Wins: " + wins;
+             document.getElementById('wins').innerHTML = "Wins: " + wins;
             document.getElementById('losses').innerHTML = "losses: " + losses;
             document.getElementById('guesses').innerHTML = `Guesses left: ${guesses}` ;
-            document.getElementById('chosen').innerHTML = "Your guesses so far: " + message;  
-
+            document.getElementById('chosen').textContent = 'Guesses so far: ' + guessSoFar.join(', ') 
+            
         }
          
 
