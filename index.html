@@ -16,7 +16,7 @@
 
         <p><span id = "numGuesses"></span></p>
 
-        <p>Your guesses so far: <span id = "playersGuess"></span></p>
+        <p><span id = "playersGuess"></span></p>
     </form>
 
 
@@ -49,8 +49,8 @@
             }
 
             const showGuessSoFar = function(){
-                
-            document.getElementById('chosen').innerHTML = 'Guesses so far: ' + guessSoFar.join(', ') 
+             let usedGuesses =  guessSoFar.join(', ')  
+            document.getElementById('playersGuess').innerHTML = 'Your guesses so far: ' + usedGuesses;
             
             }
             const loseGuesses = function(){
@@ -63,6 +63,7 @@
                 showWins()
                 showLosses()
                 guessesRemaining()
+                showGuessSoFar()
             
             compGuess = getGuess()
             console.log(compGuess)
@@ -72,12 +73,13 @@
 
                 if(event.keyCode >= 65 && event.keyCode <= 90){
                     console.log(userGuess)
-                    guessSoFar.push(userGuess)
-                    //console.log(guessSoFar.join(', '))
+                   
                     if(compGuess !== userGuess){
                         guesses = guesses - 1
                         guessesRemaining()
-                        
+                        guessSoFar.push(userGuess)
+                        showGuessSoFar()
+                        if(userGuess === )
                         
                         if(guesses === 0){
                             losses = losses + 1
@@ -94,51 +96,6 @@
                 
             }
             }
-
-
-
-
-
-        //     resetGame()
-        //     showWins()
-        //     showLosses()
-        //     guessesRemaining()
-        //     computerGuess()
-        //     showGuessSoFar()
-
-        //     document.onkeyup = function(event) {
-        //     let userGuess = String.fromCharCode(event.keyCode).toLowerCase()
-            
-        //         if (event.keyCode >= 65 && event.keyCode <= 90){ 
-        //                 console.log(userGuess)
-                        
-                        
-        //                     if(userGuess === compGuess){
-        //                         wins = wins + 1
-        //                         console.log('You Win')
-        //                         runGame()
-        //                     }else if(guesses === 0){ 
-        //                         losses = losses + 1
-        //                         runGame()
-        //                      }
-        //                      else{ 
-        //                          showGuessSoFar()
-        //                          }
-                           
-               
-                
-        //     }
-        //         else{}
-            
-            
-            
-            
-        //     }
-             
-            
-            
-            
-        // }
          
 
         runGame()
